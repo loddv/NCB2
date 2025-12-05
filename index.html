@@ -26,26 +26,27 @@
 			Some key features include massively expanded encounter pools and reworks to many pokemon to make them more unique.
 			It also works great for nuzlockes and other challenge runs that would offer room for new Pokemon to shine.</div>
 		<br><br>
+		<button class="MainMenuButton" style="background-image: url('Images/Unown.png');" onclick="OpenAboutPage()">About</button>
 		<button class="MainMenuButton PokedexButton" onclick="OpenPokedex()">Pokedex</button>
+		<br>
 		<button class="MainMenuButton EncountersButton" onclick="OpenEncounters()">Encounters</button>
+		<button class="MainMenuButton" style="background-image: url('Images/FocusBand.png');" onclick="OpenBattleChanges()">Mechanics</button>
 		<br><br><br><br><br>
-		<div class="MainText" style="width: 50%;">Credits:
-			<br>Lead Developer - Frost Falcon
-			<br>Custom Sprites - Ninja Fish
-			<br>New Gen Sprites - The Smogon Sprite Project and Moon Black 2
-			<br>Coding Assistance - Dasquyd, Dararo, Anonymous, and others from the Kingdom of DS Rom Hacking Discord
-		</div>
-		<br><br><br>
 		<a class="MainMenuButton" href="InfiniteBlack2Patch.zip" style="
 		width: 200;
 		height: 30;
+		position: fixed;
+		bottom: 120;
 		text-align: center;
 		color: black;
 		filter: brightness(0.75);
 		">Download Patch</a>
-		<a class="MainMenuButton" href="https://youtu.be/_uUtLfby8_c" style="
+		<a class="MainMenuButton" href="https://youtu.be/AHsCQ-SYpeg" style="
 		width: 200;
 		height: 30;
+		position: fixed;
+		bottom: 120;
+		left: 260;
 		text-align: center;
 		color: black;
 		filter: brightness(0.75);
@@ -63,16 +64,24 @@
 		overflow-y: hidden;"></div>
 	<div id="poke1" class="PokeImage" style="
 		position: absolute;
-		left: 1112px;
-		top: 80px;
-		background-image: url(DexSprites/Salamence.png);
+		left: 1124px;
+		top: 120px;
+		background-image: url(DexSprites/Sandslash.png);
 		width: 384;
 		height: 384;
 		"></div>
 	<div id="poke2" class="PokeImage" style="
 		position: absolute;
-		left: 1516px;
-		top: 364px;
+		left: 1524px;
+		top: 356px;
+		background-image: url(DexSprites/Sandslash.png);
+		width: 384;
+		height: 384;
+		"></div>
+	<div id="poke3" class="PokeImage" style="
+		position: absolute;
+		left: 1024px;
+		top: 548px;
 		background-image: url(DexSprites/Sandslash.png);
 		width: 384;
 		height: 384;
@@ -86,65 +95,67 @@
 		height: 384;
     	image-rendering: auto;
 		"></div>
-	<div id="poke3" class="PokeImage" style="
-		position: absolute;
-		left: 1036px;
-		top: 488px;
-		background-image: url(DexSprites/Rapidash.png);
-		width: 384;
-		height: 384;
-		"></div>
 	<script>
 
-		//var pokeSprites =
-		//[
-		//	"Sandslash",
-		//	"Sandslash (1)",
-		//	"Rapidash",
-		//	"Dewgong",
-		//	"Vaporeon (1)",
-		//	"Jolteon (1)",
-		//	"Flareon (1)",
-		//	"Espeon (1)",
-		//	"Umbreon (1)",
-		//	"Leafeon (1)",
-		//	"Glaceon (1)",
-		//	"Feraligatr",
-		//	"Noctowl",
-		//	"Mamoswine",
-		//	"Donphan",
-		//	"Blaziken",
-		//	"Vikavolt",
-		//	"Ribombee",
-		//	"Swellow",
-		//	"Salamence",
-		//	"Torterra",
-		//	"Lumineon",
-		//	"Unfezant",
-		//	"Goodra",
-		//	"Excadrill",
-		//	"Eelektross",
-		//];
-//
-		//function randPoke()
-		//{
-		//	let i = Math.floor(Math.random() * pokeSprites.length);
-		//	return pokeSprites[i];
-		//}
-		//var p1 = randPoke();
-		//console.log(p1);
-		//do
-		//{
-		//	var p2 = randPoke();
-		//} while (p2 == p1);
-		//do
-		//{
-		//	var p3 = randPoke();
-		//} while (p3 == p1 || p3 == p2);
-//
-		//document.getElementById("poke1").style.backgroundImage = "url(DexSprites/" + p1 + ".png)";
-		//document.getElementById("poke2").style.backgroundImage = "url(DexSprites/" + p2 + ".png)";
-		//document.getElementById("poke3").style.backgroundImage = "url(DexSprites/" + p3 + ".png)";
+		var pokeSprites =
+		[
+			["Sandslash", 0],
+			["Sandslash (1)", 0],
+			["Rapidash", -60],
+			["Dewgong", -30],
+			["Vaporeon (1)", -10],
+			["Jolteon (1)", 0],
+			["Flareon (1)", -10],
+			["Espeon (1)", -10],
+			["Umbreon (1)", -10],
+			["Leafeon (1)", -10],
+			["Glaceon (1)", -20],
+			["Feraligatr", -40],
+			["Noctowl", -30],
+			["Donphan", 10],
+			["Blaziken", -40],
+			["Vikavolt", 0],
+			["Ribombee", -30],
+			["Swellow", -10],
+			["Salamence", -40],
+			["Torterra", -50],
+			["Unfezant", -40],
+			["Goodra", -60],
+			["Eelektross", -30],
+			["Gyarados", -20],
+			["Seaking", -20],
+			["Gogoat", -30],
+			["Clodsire", 10],
+			["Minior", -30],
+			["Auroras", -60],
+			["Tyrantrum", -40],
+		];
+
+		function randPoke()
+		{
+			let i = Math.floor(Math.random() * pokeSprites.length);
+			return pokeSprites[i];
+		}
+		var p1 = randPoke();
+		do
+		{
+			var p2 = randPoke();
+		} while (p2[0] == p1[0]);
+		do
+		{
+			var p3 = randPoke();
+		} while (p3[0] == p1[0] || p3[0] == p2[0]);
+
+		//p1 = pokeSprites[pokeSprites.length - 1];
+		//p2 = pokeSprites[pokeSprites.length - 1];
+		//p3 = pokeSprites[pokeSprites.length - 1];
+
+		document.getElementById("poke1").style.backgroundImage = "url('DexSprites/" + p1[0] + ".png')";
+		document.getElementById("poke1").style.top = 120 + p1[1];
+		document.getElementById("poke2").style.backgroundImage = "url('DexSprites/" + p2[0] + ".png')";
+		document.getElementById("poke2").style.top = 356 + p2[1];
+		document.getElementById("poke3").style.backgroundImage = "url('DexSprites/" + p3[0] + ".png')";
+		document.getElementById("poke3").style.top = 538 + p3[1];
 
 		function OpenPokedex()
 		{
@@ -156,6 +167,18 @@
 		{
 			history.pushState(null, document.title, location.pathname);
 			window.location.replace("Pages/Encounters.html");
+		}
+
+		function OpenBattleChanges()
+		{
+			history.pushState(null, document.title, location.pathname);
+			window.location.replace("Pages/BattleChanges.html");
+		}
+
+		function OpenAboutPage()
+		{
+			history.pushState(null, document.title, location.pathname);
+			window.location.replace("Pages/AboutPage.html");
 		}
 
 		function OpenTeamBuilder()

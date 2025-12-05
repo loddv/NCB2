@@ -20,7 +20,21 @@ iconSwaps =
     267: 0,
     268: 0,
     269: 0,
+    225: 0,
+    441: 0,
+    401: 0,
+    402: 0,
+    52: 0,
+    53: 0,
+    431: 0,
+    432: 0,
 };
+
+hiddenForms =
+[
+    "Vulpix",
+    "Ninetales"
+];
 
 class Pokemon
 {

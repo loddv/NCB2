@@ -45,7 +45,7 @@ function CheckFilter(filter, poke)
     {
         return true;
     }
-    if (dropdown == "Type" && (poke.type1.toLowerCase().includes(filter) || poke.type2.toLowerCase().includes(filter)))
+    if (dropdown == "Type" && pokedexEntries.some((p) => poke.forms.includes(p.name) && (p.type1.toLowerCase().includes(filter) || p.type2.toLowerCase().includes(filter))))
     {
         return true;
     }
@@ -214,10 +214,13 @@ function OpenPokedexEntry(poke, resetForms)
         document.getElementById("formList").innerHTML = "";
         for (let i = 0; i < poke.forms.length; i++)
         {
-            let form = pokedexEntries.find((p) => { return p.name == poke.forms[i]});
-            if (form != null)
+            if (i == 0 || !hiddenForms.includes(poke.name))
             {
-                MakeFormIcon(20 + 90 * i, 440, form);
+                let form = pokedexEntries.find((p) => { return p.name == poke.forms[i]});
+                if (form != null)
+                {
+                    MakeFormIcon(20 + 90 * (i % 8), i < 8 ? 440 : 540, form);
+                }
             }
         }
     }
@@ -226,8 +229,8 @@ function OpenPokedexEntry(poke, resetForms)
         let form = pokedexEntries.find((p) => { return p.name == poke.forms[i]});
         if (form == poke)
         {
-            document.getElementById("formOutline").style.top = 440;
-            document.getElementById("formOutline").style.left = 16 + 90 * (i);
+            document.getElementById("formOutline").style.top = i < 8 ? 440 : 540;
+            document.getElementById("formOutline").style.left = 16 + 90 * (i % 8);
             if (poke.forms.indexOf(poke.name) == 0)
                 document.getElementById("formOutline").style.left = 16 + 90 * (i + poke.formid);
         }
@@ -244,6 +247,8 @@ function OpenPokedexEntry(poke, resetForms)
         {
             let fromIcon = [];
             let form = pokedexEntries.find((p) => { return p.name == poke.evolutionMethods[i].from});
+            let altForm = pokedexEntries.find((p) => {return p.name.startsWith(form.name) && p.formid == poke.formid});
+            if (altForm) form = altForm;
             if (!(form.name in usedEvos))
             {
                 let x = 400 + 90 * i;
@@ -260,6 +265,12 @@ function OpenPokedexEntry(poke, resetForms)
             }
 
             form = pokedexEntries.find((p) => { return p.name == poke.evolutionMethods[i].to});
+            altForm = pokedexEntries.find((p) => {return p.name.startsWith(form.name) && p.formid == poke.formid});
+            if (altForm) form = altForm;
+            if (!form)
+            {
+                form = pokedexEntries.find((p) => { return p.name == poke.evolutionMethods[i].to});
+            }
             let x = fromIcon[1] + 160;
             let y = fromIcon[2];
             let icon = MakeFormIcon(x, y, form);
@@ -325,6 +336,7 @@ function OpenPokedexEntry(poke, resetForms)
         }
         evoHeight = height > 3 ? 740 : height > 2 ? 640 : height == 2 ? 600 : 560;
     }
+    if (poke.forms.length > 8) evoHeight += 100;
 
     let eggGroups = poke.eggGroups.length == 1 ? ("Egg Group: " + poke.eggGroups[0]) : ("Egg Groups: " + poke.eggGroups[0] + ", " + poke.eggGroups[1]);
     document.getElementById("miscText").innerHTML = "Level Rate: " + poke.levelRate + "<br>EV Yield: " + poke.evYield + "<br>" + eggGroups;

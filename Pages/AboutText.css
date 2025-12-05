@@ -1,0 +1,126 @@
+.Banner
+{
+    font: 48px monospace;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    background-image: url(../Images/EncountersTop.png);
+    width: 1920;
+    height: 168;
+    image-rendering: pixelated;
+    z-index: 6;
+    line-height: 64px;
+    text-align: left;
+    text-indent: 2%;
+    justify-content: center;
+    text-shadow: 2px 4px 0 gray;
+    color: white;
+    background-size:contain;
+}
+
+.Footer
+{
+    background-image: url(../Images/PokedexBottom.png);
+    z-index: 3;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    image-rendering: pixelated;
+    background-position: bottom;
+    background-repeat: no-repeat;
+    position: absolute;
+    width: 100%;
+    height: 48;
+}
+
+@keyframes scroll {
+    from   {background-position: 100%;}
+    to  {background-position: 0%;}
+}
+@keyframes scroll2 {
+    from   {background-position: 256px;}
+    to  {background-position: 0px;}
+}
+
+.ScrollingArrows
+{
+    background-image: url(../Images/PokedexArrows.png);
+    image-rendering: pixelated;
+    z-index: 6;
+    background-position: top left;
+    background-size: contain;
+    position: absolute;
+    animation-name: scroll2;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+.MapIcon
+{
+    position: absolute;
+    width: 80;
+    height: 80;
+    background-color: transparent;
+    border-color: transparent;
+    
+    background-position: center;
+    background-size: 80%;
+    background-repeat: no-repeat;
+    transition: 0.2s;
+    z-index: 12;
+}
+.MapIcon:hover
+{
+    background-size: 100%;
+    color: rgb(251, 243, 105);
+    text-shadow: 2px 1px rgb(170, 146, 48);
+}
+
+.CategoryButton
+{
+    image-rendering: pixelated;
+    background-image: url("../Images/EncounterCategoryButton.png");
+    background-size: 95%;
+    background-position: center;
+    background-position-x: 50%;
+    background-repeat: no-repeat;
+    position: absolute;
+    
+    font: 24px monospace;
+    color: white;
+    text-align: center;
+    text-shadow: 1px 2px dimgray;
+    line-height: 1.8;
+
+    width: 160;
+    height: 40;
+    padding: 10px;
+    transition: 0.2s;
+    user-select: none;
+    z-index: 10;
+}
+
+.CategoryButton:hover
+{
+    background-image: url("../Images/EncounterCategoryButton_Selected.png");
+    color: rgb(251, 243, 105);
+    text-shadow: 2px 1px rgb(170, 146, 48);
+}
+
+.ChangesSectionHeader
+{
+    margin-left: 1%;
+    font: 64px monospace;
+    color: white;
+    text-align: left;
+    text-shadow: 2px 2px black;
+}
+.ChangesSection
+{
+    font: 24px monospace;
+    line-height: 1.5;
+    color: white;
+    text-align: left;
+    text-shadow: 2px 2px black;
+}

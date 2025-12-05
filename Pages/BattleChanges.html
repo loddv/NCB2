@@ -1,0 +1,68 @@
+<HTML lang="en">
+	<link rel="stylesheet" href="../style.css">
+	<link rel="stylesheet" href="AboutText.css">
+	<script src="Pokedex.js"></script>
+	<script src="BattleChanges.js"></script>
+	<script src="../Data/DataTypes.js"></script>
+    <script src="../Data/PokedexEntries.js"></script>
+
+	<HEAD>
+		<META CHARSET="UTF-8">
+		<TITLE>Battle Changes</TITLE>
+	</HEAD>
+	<body id="zoomBody" style="zoom: 100%; background-color: rgb(0, 0, 0); overflow: hidden;" >
+        <div class="Banner"><strong>Battle Changes</strong></div>
+
+        <div class="HomeButton" style="background-image: url(../Images/HomeIcon.png);
+        z-index: 8;
+        position: absolute;
+        top: 88px;
+        left: 8px;"
+        onclick="GoHome()"></div>
+        <br>
+
+        <div id="head" style="
+            display: inline-block;
+            background-color: gray;
+            background-attachment: fixed;
+            text-align: left;">
+            <br>
+
+            <br><br>
+            <div id="dexBG" style="background-image: url(../Images/PokedexBGGray.png);
+            z-index: 2;
+            background-position: 0 0;
+            position: absolute;
+            top: 168px;
+            left: 0;
+            width: 100%;
+            height: 716;
+            overflow-y: scroll;"></div>
+        </div>
+        </div>
+        <div class="Footer"></div>
+        
+        <script>
+            SetupCategories();
+
+            function UpdateZoom()
+            {
+                if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent))
+                {
+                    document.getElementById("zoomBody").style.zoom = "50%";
+                }
+                else
+                {
+                    document.getElementById("zoomBody").style.zoom = GetZoom() + "%";
+                }
+            }
+
+            function GetZoom() {return Math.min(Math.ceil(window.innerWidth / 19.2), Math.ceil(window.innerHeight / 9.25));}
+            window.addEventListener("resize", () =>
+            {
+                UpdateZoom();
+            });
+            UpdateZoom();
+        </script>
+    </body>
+</HTML>

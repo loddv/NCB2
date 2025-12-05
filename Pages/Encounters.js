@@ -5,7 +5,7 @@ let groups = {
     "Fourth Gym" : ["Desert Resort", "Relic Castle 1", "Route 5", "Route 16", "Lostlorn Forest", "Pinwheel Forest 2", "Route 3", "Wellspring Cave", "Striaton City", "Dreamyard 1", "Dreamyard 2"],
     "Fifth Gym" : ["Route 6", "Chargestone Cave", "Clay Tunnel", "Twist Mountain"],
     "Sixth Gym" : ["Relic Passage 2", "Relic Castle 2", "Mistralton Cave", "Route 7", "Celestial Tower"],
-    "Seventh Gym" : ["Reversal Mountain 1", "Strange House", "Reversal Mountain 2", "Undella Town", "Undella Bay", "Seaside Cave", "Route 14", "Route 13", "Route 12", "Village Bridge", "Route 11", "Route 9"],
+    "Seventh Gym" : ["Reversal Mountain 1", "Strange House", "Reversal Mountain 2", "Undella Town", "Undella Bay", "Seaside Cave", "Route 14", "Abundant Shrine", "Route 13", "Route 12", "Village Bridge", "Route 11", "Route 9"],
     "Eighth Gym" : ["Route 21", "Route 22", "Giant Chasm 1"],
     "Elite Four" : ["Giant Chasm 2", "Route 23", "Victory Road"],
 }
@@ -67,6 +67,7 @@ function OpenTab(text)
             document.getElementById('dexBG').append(b);
         }
     }
+    state[0] = text;
 }
 
 function LoadPool(pool)
@@ -85,6 +86,7 @@ function LoadPool(pool)
     document.getElementById('typeDropdown').innerHTML = dropdown;
 
     LoadPieChart(pool);
+    state[1] = pool;
 }
 
 function LoadPieChart(pool)
@@ -120,13 +122,24 @@ function LoadPieChart(pool)
         icon.style.backgroundImage = poke.sprite;
 
         let ang = start + 360 * rate / 2 - 90;
-        let size = 200 - encounterPools[pool][season][type].length * 4;
+        let size = 220 - encounterPools[pool][season][type].length * 3;
         icon.style.width = size;
         icon.style.height = size;
         icon.style.left = 550 - size / 2 + Math.cos(ang * (Math.PI/180)) * 220;
         icon.style.top = 300 - size / 2 + Math.sin(ang * (Math.PI/180)) * 220;
         icon.style.lineHeight = (300 - 4 * encounterPools[pool][season][type].length) + "px";
-        icon.innerHTML = Math.round(rate * 100) + "%";
+        icon.innerHTML = (rate * 100) + "%";
+        
+        icon.addEventListener("click", function() {
+            OpenPokedexEntry(poke);
+        });
+        let hitbox = document.createElement("div");
+        hitbox.className = "PokeHitbox";
+        hitbox.style.width = size / 2;
+        hitbox.style.height = size / 2;
+        hitbox.style.top = size / 4;
+        hitbox.style.left = size / 4;
+        icon.appendChild(hitbox);
 
         document.getElementById('chart').appendChild(icon);
         start += 360 * rate;
@@ -177,3 +190,11 @@ type1Colors = {
     "Steel" : "#D1D1E0",
     "Fairy" : "#FAB2E2",
 };
+
+var state = ["", ""];
+
+function OpenPokedexEntry(poke)
+{
+    history.pushState(state, document.title, location.pathname);
+    window.location.replace("Pokedex.html?Pokemon=" + poke.name);
+}
