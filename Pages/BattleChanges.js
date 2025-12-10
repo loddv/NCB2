@@ -16,6 +16,9 @@ sections = [
         "guaranteed at +4",
         "",
         "",
+        "Burn damage is reduced to 1/16 of the Pokemon's health",
+        "",
+        "",
         "Ghost type Pokemon are now immune to hail damage",
         "Enemy trainers now know your Pokemon's ability at all times (this primarily fixes the ability storage bug, but it also evens the playing field with many players using docs to know the opponent's abilities)"
     ],

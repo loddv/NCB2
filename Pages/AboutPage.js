@@ -4,7 +4,8 @@ sections = [
         "Lead Developer - Frost Falcon",
         "Custom Sprites - Ninja Fish",
         "New Gen Pokemon Sprites - The Smogon Sprite Project, Moon Black 2, and HG-Engine",
-        "Coding Assistance and Design Feedback - Various people in the Kingdom of DS Rom Hacking Discord",
+        "Coding Assistance - Dasquyd, Dararo, Anonymous",
+        "Design Feedback - Various people in the Kingdom of DS Rom Hacking Discord",
     ],
     [
         "What is Infinite Black 2?",
